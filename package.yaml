@@ -31,13 +31,17 @@ ghc-options:
 library:
   dependencies:
   - base
-  source-dirs: library
+  - text
+  source-dirs:
+  - library
   exposed-modules:
   - LogisticRegrecion
+  - LogisticRegrecion.IO
 
 executables:
   LogisticRegressionInHaskell:
-    source-dirs: executable
+    source-dirs: 
+    - executable
     main: Main.hs
     dependencies:
     - base

@@ -1,5 +1,19 @@
 module LogisticRegrecion where
 
+data (RealFrac v) => TrainConfig v =  TrainConfig{trainAlpha::v, trainN::v}
+
+data Net a = Net [[a]] [a]
+
+treatTarget:: RealFrac a  => a -> [a]
+treatTarget a = 
+    let
+        aux _ (-1) = []
+        aux n b
+            | n == b    = 1:aux n (b-1)
+            | otherwise = 0:aux n (b-1)
+    in
+        aux a 9
+
 softmax:: RealFrac a => [a] -> [a]
 softmax as =
     let
@@ -12,21 +26,23 @@ softmax as =
 
 sigmoid:: RealFrac a => [[a]] -> [a] -> [a] -> [a]
 sigmoid [] [] _ = []
-sigmoid (ws:wss) (b:bs) xs = -- pending: handle exceptions
+sigmoid (ws:wss) (b:bs) xs =
     let
         dot = sum $ zipWith (*) ws xs
     in
         dot + b : sigmoid wss bs xs
+sigmoid _ _ _ = error "for all weights[n][m] shoud be bias[n]!" -- pending: handle exceptions
 
 predic:: RealFrac a => [[a]] -> [a] -> [a] -> [a]
 predic ws bs xs = softmax $ sigmoid ws bs xs
 
-train:: RealFrac a => a -> a -> [a] -> [[a]] -> [a] -> [a] -> ([a],[[a]])
-train alpha trainN targetY ws bs xs =
+train:: RealFrac a => TrainConfig a -> Net a -> [a] -> a -> Net a
+train tc (Net wss bs) xs y =
     let
-        ys = predic ws bs xs
+        targetY = treatTarget y
+        ys = predic wss bs xs
         deltasYs = zipWith (-) targetY ys
-        lc = alpha / trainN
+        lc = trainAlpha tc / trainN tc
         fixW dy ws  =
             let
                 c = dy * lc
@@ -34,4 +50,4 @@ train alpha trainN targetY ws bs xs =
                 zipWith (+) ws $  (c*) <$> xs
         fixedBs = zipWith (+) bs $ (lc*) <$> deltasYs 
     in
-        (fixedBs, zipWith ($) (fixW <$> deltasYs) ws)
+        Net ( zipWith ($) (fixW <$> deltasYs) wss) fixedBs
