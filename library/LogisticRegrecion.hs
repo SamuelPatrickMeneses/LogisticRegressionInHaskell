@@ -2,7 +2,7 @@ module LogisticRegrecion where
 
 data (RealFrac v) => TrainConfig v =  TrainConfig{trainAlpha::v, trainN::v}
 
-data Net a = Net [[a]] [a]
+data (RealFrac a, Show a, Read a) => Net a =  Net [[a]] [a]
 
 treatTarget:: RealFrac a  => a -> [a]
 treatTarget a = 
@@ -36,7 +36,7 @@ sigmoid _ _ _ = error "for all weights[n][m] shoud be bias[n]!" -- pending: hand
 predic:: RealFrac a => [[a]] -> [a] -> [a] -> [a]
 predic ws bs xs = softmax $ sigmoid ws bs xs
 
-train:: RealFrac a => TrainConfig a -> Net a -> [a] -> a -> Net a
+train:: (RealFrac a, Show a, Read a) => TrainConfig a -> Net a -> [a] -> a -> Net a
 train tc (Net wss bs) xs y =
     let
         targetY = treatTarget y
