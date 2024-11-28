@@ -1,8 +1,20 @@
 module LogisticRegrecion where
 
+import System.Random (randoms, mkStdGen)
+
 data (RealFrac v) => TrainConfig v =  TrainConfig{trainAlpha::v, trainN::v}
 
-data (RealFrac a, Show a, Read a) => Net a =  Net [[a]] [a]
+data (RealFrac a, Show a, Read a) => Net a =  Net [[a]] [a] deriving (Show, Read)
+
+newRandomNet:: Int -> Int -> Net Float
+newRandomNet inputN outputN = 
+    let
+        rlist:: Int -> [Float]
+        rlist l = fmap fromInteger $ take l $ randoms $ mkStdGen 10 -- shold fix thet
+        bs  = rlist outputN
+        wss = [rlist inputN | _ <- [1 .. outputN]] 
+    in
+        Net wss bs
 
 treatTarget:: RealFrac a  => a -> [a]
 treatTarget a = 
