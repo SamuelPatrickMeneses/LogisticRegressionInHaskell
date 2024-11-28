@@ -3,10 +3,16 @@
 -- wrote in their libraries.
 module Main where
 import  LogisticRegrecion.IO
+import LogisticRegrecion
+
+trainDataFile = "./data/train.csv"
+
+inputN  = 784
+outputN = 10
 
 main :: IO ()
 main = do
-    mat <- readTrainData "./data/train.csv" 80
-    print $ head <$> mat 
+    net <- readNet trainDataFile 2
+    print net 
 
 
