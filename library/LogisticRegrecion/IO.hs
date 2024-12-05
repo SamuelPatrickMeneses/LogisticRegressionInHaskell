@@ -46,6 +46,7 @@ saveMatrix p matrix =
 
         appendF (l:ls) = do
             appendFile p l
+            appendFile p "\n"
             appendF ls
         appendF [] = return ()
     in do
