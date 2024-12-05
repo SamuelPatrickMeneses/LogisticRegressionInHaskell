@@ -30,7 +30,7 @@ main = do
     trainData <- readNet trainDataFile 800
     initialNet <- readNet initilaNetFile   10
     (Net testData  targest) <- readNet testDataFile 80
-    let trained = train config initialNet trainData
+    let trained = epohc config initialNet trainData 10
     let test = predic trained <$> testData
-    saveNet netFile  trained
+    --saveNet netFile  trained
     printResult test targest

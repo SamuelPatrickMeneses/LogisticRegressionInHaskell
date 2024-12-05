@@ -71,3 +71,13 @@ train tconf net (Net (xs:xss) (y:ys)) =
     in
         train tconf netStep (Net xss ys)
 train _ n _ = n
+
+epohc:: (RealFrac a, Show a, Read a) => TrainConfig a -> Net a -> Net a -> Int -> Net a
+epohc config net td c =
+    let
+        trained = train config net td
+    in
+        if c > 0 then
+            epohc config trained td (c - 1)
+        else
+            net
