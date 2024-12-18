@@ -51,6 +51,21 @@ executables:
     - -rtsopts
     - -threaded
     - -with-rtsopts=-N
+  visualiser:
+    source-dirs: 
+    - visualiser
+    main: Main.hs
+    dependencies:
+    - base
+    - LogisticRegressionInHaskell
+    - gloss
+    other-modules:
+    - Visualiser.Image
+    - Visualiser.Vec3
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
 
 benchmarks:
   LogisticRegressionInHaskell-benchmarks:
