@@ -45,6 +45,8 @@ Para ver uma representação visual do processo ou dos dados:
 stack run visualiser
 ```
 
+![Demonstração do Visualizador](doc/visualiser.png)
+
 ## 📂 Estrutura do Projeto
 
 - **`library/`**: Contém a lógica central da rede neural (`LogisticRegrecion.hs`) e utilitários de entrada/saída (`LogisticRegrecion/IO.hs`).
