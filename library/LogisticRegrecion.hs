@@ -25,12 +25,11 @@ treatTarget a =
             | otherwise = 0:aux n (b+1)
     in
         aux a 0
-
+maxV as = foldl max 0 as
 softmax:: RealFrac a => [a] -> [a]
 softmax as =
     let
-        maxV = foldl max 0 as
-        softEach v = exp $ realToFrac $ realToFrac  v - maxV
+        softEach v = exp $ realToFrac $ realToFrac  v - maxV as
         softenValues = realToFrac . softEach <$> as
         sumV = sum softenValues
     in

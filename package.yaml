@@ -40,9 +40,20 @@ library:
   - LogisticRegrecion.IO
 
 executables:
-  LogisticRegressionInHaskell:
+  train:
     source-dirs: 
-    - executable
+    - executables/train
+    main: Main.hs
+    dependencies:
+    - base
+    - LogisticRegressionInHaskell
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+  check_percent:
+    source-dirs: 
+    - executables/check_percent
     main: Main.hs
     dependencies:
     - base
@@ -53,7 +64,7 @@ executables:
     - -with-rtsopts=-N
   visualiser:
     source-dirs: 
-    - visualiser
+    - executables/visualiser
     main: Main.hs
     dependencies:
     - base

@@ -3,7 +3,7 @@
 -- wrote in their libraries.
 module Main where
 import LogisticRegrecion.IO
-import LogisticRegrecion
+import LogisticRegrecion hiding (maxV)
 import Visualiser.Image
 import Visualiser.Vec3
 import Graphics.Gloss as G

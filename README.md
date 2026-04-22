@@ -26,7 +26,7 @@ O projeto está dividido em três componentes principais:
 Para iniciar o processo de treinamento do modelo:
 
 ```bash
-stack run LogisticRegressionInHaskell-exe
+stack run train
 ```
 *O modelo lerá os dados de `./data/train.csv` e salvará os pesos resultantes em `./data/net.csv`.*
 
@@ -34,7 +34,7 @@ stack run LogisticRegressionInHaskell-exe
 Para testar a precisão do modelo treinado contra um conjunto de testes:
 
 ```bash
-stack run persent
+stack run check_percent
 ```
 *Este comando exibe a porcentagem de acertos e anexa o resultado em `./data/historic.txt`.*
 
@@ -48,16 +48,16 @@ stack run visualiser
 ## 📂 Estrutura do Projeto
 
 - **`library/`**: Contém a lógica central da rede neural (`LogisticRegrecion.hs`) e utilitários de entrada/saída (`LogisticRegrecion/IO.hs`).
-- **`executable/`**: Ponto de entrada principal para o treinamento do modelo.
-- **`check_persent/`**: Script para calcular a taxa de acerto (acurácia).
-- **`visualiser/`**: Interface gráfica para visualização (utiliza a biblioteca `gloss`).
+- **`executables/train/`**: Ponto de entrada principal para o treinamento do modelo.
+- **`executables/check_percent/`**: Script para calcular a taxa de acerto (acurácia).
+- **`executables/visualiser/`**: Interface gráfica para visualização (utiliza a biblioteca `gloss`).
 - **`data/`**: Pasta destinada aos arquivos `.csv` de treino, teste e persistência da rede.
 
 ## 📝 Avaliação Técnica
 
 ### Pontos Positivos
 - **Implementação Funcional**: A implementação segue os princípios de programação funcional, facilitando a compreensão da matemática por trás da regressão.
-- **Modularização**: O uso de `library` e múltiplos executáveis (`persent`, `visualiser`) demonstra uma boa organização de projeto Haskell.
+- **Modularização**: O uso de `library` e múltiplos executáveis (`check_percent`, `visualiser`) demonstra uma boa organização de projeto Haskell.
 - **Visualização**: A inclusão de um visualizador com `gloss` é um excelente diferencial para entender os resultados.
 
 ### Sugestões de Melhoria
